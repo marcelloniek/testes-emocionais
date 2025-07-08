@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Emocional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f4f8;
+      color: #000;
+      text-align: center;
+    }
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+    .language-buttons button,
+    .test-buttons a {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .disclaimer, .instruction {
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: justify;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .hidden {
+      display: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #f0f0f0;
+      }
+      .language-buttons button,
+      .test-buttons a {
+        background-color: #1e88e5;
+        color: white;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Select Your Language</h1>
+  <h2 id="subtitle">Please choose your preferred language</h2>
+
+  <div class="language-buttons" id="language-buttons">
+    <button onclick="selectLanguage('PORTUGUES')">🇧🇷 Português</button>
+    <button onclick="selectLanguage('INGLES')">🇺🇸 English</button>
+    <button onclick="selectLanguage('ESPANHOL')">🇪🇸 Español</button>
+    <button onclick="selectLanguage('ALEMAO')">🇩🇪 Deutsch</button>
+    <button onclick="selectLanguage('ITALIANO')">🇮🇹 Italiano</button>
+    <button onclick="selectLanguage('KOREANO')">🇰🇷 한국어</button>
+    <button onclick="selectLanguage('JAPONES')">🇯🇵 日本語</button>
+  </div>
+
+  <div class="disclaimer hidden" id="disclaimer"></div>
+  <div class="instruction hidden" id="instruction"></div>
+  <div class="test-buttons hidden" id="test-buttons"></div>
+
+  <script>
+    const data = {"PORTUGUES": {"title": "Teste Emocional", "subtitle": "Descubra como você lida com as emoções", "disclaimer": "Este teste foi criado especificamente para fins educativos e em hipótese alguma poderá substituir uma avaliação técnica por um profissional de saúde. É um teste de caráter didático, com o único objetivo de ajudar as pessoas a entenderem o grau de dificuldade que têm para lidar com alguns temas de saúde emocional.", "instruction": "Indique com que frequência cada situação a seguir acontece com você atualmente: (1) Nunca | (2) Raramente | (3) Às vezes | (4) Frequentemente | (5) Sempre", "disclaimerTitle": "AVISO DE ISENÇÃO DE RESPONSABILIDADE", "tests": {"Ansiedade": "https://teste-ansiedade.vercel.app/", "Depressão": "https://teste-depressao.vercel.app/", "Estresse": "https://teste-estresse.vercel.app/", "Raiva": "https://teste-raiva.vercel.app/", "Culpa": "https://teste-culpa.vercel.app/", "Solidão": "https://teste-solidao.vercel.app/", "Vício": "https://teste-vicio.vercel.app/", "Trauma": "https://teste-trauma.vercel.app/"}}, "INGLES": {"title": "Emotional Test", "subtitle": "Discover how you deal with your emotions", "disclaimer": "This test has been created exclusively for educational purposes and must never replace a professional health evaluation. It is an educational tool, intended solely to help individuals understand their degree of difficulty in dealing with certain emotional health topics.", "instruction": "Indicate how often each situation currently happens to you: (1) Never | (2) Rarely | (3) Sometimes | (4) Frequently | (5) Always", "disclaimerTitle": "DISCLAIMER", "tests": {"Anxiety": "https://en-teste-ansiedade.vercel.app/", "Depression": "https://en-teste-depressao.vercel.app/", "Stress": "https://en-teste-estresse.vercel.app/", "Anger": "https://en-teste-raiva.vercel.app/", "Guilt": "https://en-teste-culpa.vercel.app/", "Loneliness": "https://en-teste-solidao.vercel.app/", "Addiction": "https://en-teste-vicio.vercel.app/", "Trauma": "https://en-teste-trauma.vercel.app/"}}, "ESPANHOL": {"title": "Prueba Emocional", "subtitle": "Descubre cómo manejas tus emociones", "disclaimer": "Esta prueba ha sido creada específicamente con fines educativos y en ningún caso puede reemplazar una evaluación técnica realizada por un profesional de la salud. Se trata de un test de carácter didáctico cuyo único objetivo es ayudar a las personas a comprender el grado de dificultad que tienen al afrontar ciertos temas relacionados con la salud emocional.", "instruction": "Indica con qué frecuencia te ocurre actualmente cada una de las siguientes situaciones: (1) Nunca | (2) Raramente | (3) A veces | (4) Frecuentemente | (5) Siempre", "disclaimerTitle": "DESCARGO DE RESPONSABILIDAD", "tests": {"Ansiedad": "https://sp-teste-ansiedade.vercel.app/", "Depresión": "https://sp-teste-depressao.vercel.app/", "Estrés": "https://sp-teste-estresse.vercel.app/", "Ira": "https://sp-teste-raiva.vercel.app/", "Culpa": "https://sp-teste-culpa.vercel.app/", "Soledad": "https://sp-teste-solidao.vercel.app/", "Adicción": "https://sp-teste-vicio.vercel.app/", "Trauma": "https://sp-teste-trauma.vercel.app/"}}, "ITALIANO": {"title": "Test Emotivo", "subtitle": "Scopri come gestisci le tue emozioni", "disclaimer": "Questo test è stato creato esclusivamente per scopi educativi e non può assolutamente sostituire una valutazione tecnica effettuata da un professionista della salute. Si tratta di un test a scopo didattico, il cui unico obiettivo è aiutare le persone a comprendere il grado di difficoltà che riscontrano nel trattare alcuni temi relativi alla salute emotiva.", "instruction": "Indica con quale frequenza ciascuna delle seguenti situazioni ti accade attualmente: (1) Mai | (2) Raramente | (3) A volte | (4) Frequentemente | (5) Sempre", "disclaimerTitle": "ESONERO DI RESPONSABILITÀ", "tests": {"Ansia": "https://it-teste-ansiedade.vercel.app/", "Depressione": "https://it-teste-depressao.vercel.app/", "Stress": "https://it-teste-estresse.vercel.app/", "Rabbia": "https://it-teste-raiva.vercel.app/", "Colpa": "https://it-teste-culpa.vercel.app/", "Solitudine": "https://it-teste-solidao.vercel.app/", "Dipendenza": "https://it-teste-vicio.vercel.app/", "Trauma": "https://it-teste-trauma.vercel.app/"}}, "ALEMAO": {"title": "Emotionstest", "subtitle": "Finde heraus, wie du mit Emotionen umgehst", "disclaimer": "Dieser Test wurde ausschließlich zu Bildungszwecken erstellt und ersetzt keinesfalls eine fachliche Bewertung durch einen Gesundheitsfachmann. Es handelt sich um einen didaktischen Test, dessen einziger Zweck darin besteht, Personen dabei zu helfen, den Grad ihrer Schwierigkeiten im Umgang mit bestimmten emotionalen Gesundheitsthemen zu verstehen.", "instruction": "Geben Sie an, wie oft jede der folgenden Situationen derzeit auf Sie zutrifft: (1) Nie | (2) Selten | (3) Manchmal | (4) Häufig | (5) Immer", "disclaimerTitle": "HAFTUNGSAUSSCHLUSS", "tests": {"Angst": "https://ge-teste-ansiedade.vercel.app/", "Depression": "https://ge-teste-depressao.vercel.app/", "Stress": "https://ge-teste-estresse.vercel.app/", "Wut": "https://ge-teste-raiva.vercel.app/", "Schuld": "https://ge-teste-culpa.vercel.app/", "Einsamkeit": "https://ge-teste-solidao.vercel.app/", "Sucht": "https://ge-teste-vicio.vercel.app/", "Trauma": "https://ge-teste-trauma.vercel.app/"}}, "KOREANO": {"title": "감정 테스트", "subtitle": "당신의 감정 대처 방식을 확인해보세요", "disclaimer": "이 테스트는 순수하게 교육적 목적으로 제작된 것이며, 결코 전문가의 전문적인 건강 진단을 대신할 수 없습니다. 본 테스트는 교육적인 용도로서, 감정 건강과 관련된 특정 주제를 다룰 때 자신이 겪는 어려움의 정도를 이해하도록 돕는 데 그 목적이 있습니다.", "instruction": "다음 상황들이 현재 당신에게 얼마나 자주 발생하는지 표시하세요: (1) 전혀 없음 | (2) 드묾 | (3) 가끔 | (4) 자주 | (5) 항상", "disclaimerTitle": "면책 조항", "tests": {"불안": "https://ko-teste-ansiedade.vercel.app/", "우울증": "https://ko-teste-depressao.vercel.app/", "스트레스": "https://ko-teste-estresse.vercel.app/", "분노": "https://ko-teste-raiva.vercel.app/", "죄책감": "https://ko-teste-culpa.vercel.app/", "외로움": "https://ko-teste-solidao.vercel.app/", "중독": "https://ko-teste-vicio.vercel.app/", "트라우마": "https://ko-teste-trauma.vercel.app/"}}, "JAPONES": {"title": "感情テスト", "subtitle": "感情への対処方法を見つけましょう", "disclaimer": "このテストは教育目的でのみ作成されたものであり、医療専門家による専門的な評価の代わりとなるものではありません。あくまでも教育用のテストであり、特定の精神衛生上の課題に対処する際に、どの程度困難を感じているかを理解するための補助としてご利用ください。", "instruction": "次の状況が現在どれくらい頻繁にあなたに起こっているかを示してください: (1) 決してない | (2) まれに | (3) 時々 | (4) よくある | (5) いつも", "disclaimerTitle": "免責事項", "tests": {"不安": "https://jp-teste-ansiedade.vercel.app/", "うつ病": "https://jp-teste-depressao.vercel.app/", "ストレス": "https://jp-teste-estresse.vercel.app/", "怒り": "https://jp-teste-raiva.vercel.app/", "罪悪感": "https://jp-teste-culpa.vercel.app/", "孤独": "https://jp-teste-solidao.vercel.app/", "依存症": "https://jp-teste-vicio.vercel.app/", "トラウマ": "https://jp-teste-trauma.vercel.app/"}}};
+
+    function selectLanguage(lang) {
+      const content = data[lang];
+
+      document.getElementById("title").textContent = content.title;
+      document.getElementById("subtitle").textContent = content.subtitle;
+      document.getElementById("language-buttons").classList.add("hidden");
+
+      const disclaimerBox = document.getElementById("disclaimer");
+      disclaimerBox.innerHTML = "<strong>" + content.disclaimerTitle + "</strong><br><br>" + content.disclaimer;
+      disclaimerBox.classList.remove("hidden");
+
+      const instructionBox = document.getElementById("instruction");
+      const parts = content.instruction.split(":");
+      instructionBox.innerHTML = "<strong>" + parts[0] + ":</strong><br>" + parts[1] + "<br><br>";
+      instructionBox.classList.remove("hidden");
+
+      const testButtons = document.getElementById("test-buttons");
+      testButtons.innerHTML = '';
+      for (const [label, url] of Object.entries(content.tests)) {
+        const btn = document.createElement('a');
+        btn.href = url;
+        btn.textContent = label;
+        btn.target = "_blank";
+        testButtons.appendChild(btn);
+      }
+
+      const backBtn = document.createElement("button");
+      backBtn.textContent = "⟵ Voltar";
+      backBtn.style.marginTop = "40px";
+      backBtn.style.display = "block";
+      backBtn.style.width = "100%";
+      backBtn.style.maxWidth = "400px";
+      backBtn.style.padding = "14px";
+      backBtn.style.fontSize = "18px";
+      backBtn.style.border = "none";
+      backBtn.style.borderRadius = "6px";
+      backBtn.style.backgroundColor = "#6c757d";
+      backBtn.style.color = "white";
+      backBtn.style.cursor = "pointer";
+      backBtn.onclick = () => window.location.reload();
+      testButtons.appendChild(backBtn);
+
+      testButtons.classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
